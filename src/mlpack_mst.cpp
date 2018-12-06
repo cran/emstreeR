@@ -1,3 +1,5 @@
+// [[Rcpp::depends(RcppMLPACK)]]
+
 #include <RcppMLPACK.h>				// MLPACK, Rcpp and RcppArmadillo
 
 
@@ -15,7 +17,7 @@ using namespace std;
 //' produce the Minimum Spanning Tree.
 //'
 // [[Rcpp::export]]
-Rcpp::NumericMatrix mlpack_mst(arma::mat data)
+Rcpp::NumericMatrix mlpack_mst(arma::mat& data)
 {
 	// transposing the matrix so mlpack accepts the format v4
 	data = data.t();

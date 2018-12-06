@@ -56,10 +56,6 @@
   Authors:
   \itemize{
     \item{Allan Quadros}
-  }
-  
-  Contributors:
-  \itemize{
     \item{Andre Cancado \email{cancado@unb.br}}
     \item{Pedro Brom \email{pcbrom@gmail.com}}
     \item{Eduardo Hellas \email{ehellas@gmail.com}}

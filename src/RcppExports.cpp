@@ -8,12 +8,12 @@
 using namespace Rcpp;
 
 // mlpack_mst
-Rcpp::NumericMatrix mlpack_mst(arma::mat data);
+Rcpp::NumericMatrix mlpack_mst(arma::mat& data);
 RcppExport SEXP _emstreeR_mlpack_mst(SEXP dataSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type data(dataSEXP);
     rcpp_result_gen = Rcpp::wrap(mlpack_mst(data));
     return rcpp_result_gen;
 END_RCPP

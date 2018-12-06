@@ -4,7 +4,7 @@ emstreeR
 ========
 
 <!-- # emstreeR <img src="man/figures/logo.png" align="right" /> -->
-[![Travis-CI Build Status](https://travis-ci.org/allanvc/emstreeR.svg?branch=master)](https://travis-ci.org/allanvc/emstreeR) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/emstreeR)](https://cran.r-project.org/package=emstreeR) [![Downloads](http://cranlogs.r-pkg.org/badges/emstreeR?color=brightgreen)](http://www.r-pkg.org/pkg/emstreeR) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
+[![Travis-CI Build Status](https://travis-ci.org/allanvc/emstreeR.svg?branch=master)](https://travis-ci.org/allanvc/emstreeR) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/emstreeR)](https://cran.r-project.org/package=emstreeR) <!-- [![Downloads](http://cranlogs.r-pkg.org/badges/emstreeR?color=brightgreen)](http://www.r-pkg.org/pkg/emstreeR) --> [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/grand-total/emstreeR)](https://cran.r-project.org/package=emstreeR) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
 
 Overview
 --------
@@ -92,7 +92,7 @@ out <- ComputeMST(d, verbose = FALSE)
 
 ``` r
 ## simple 2D plot:
-plot(out, col.segts = "red")
+plot(out, col.pts = "red", col.segts = "blue")
 ```
 
 <img src="man/figures/README-base-1.png">
@@ -106,6 +106,16 @@ ggplot(data = out, aes(x = x, y = y, from = from, to = to))+
 ```
 
 <img src="man/figures/README-ggplot-1.png">
+
+``` r
+## 2D curved edges plot with ggplot2:
+library(ggplot2)
+ggplot(data = out, aes(x = x, y = y, from=from, to=to))+ 
+  geom_point()+ 
+  stat_MST(geom="curve")
+```
+
+<img src="man/figures/README-ggplot_curved-1.png">
 
 ### 3D Plot
 
@@ -162,9 +172,9 @@ out <- ComputeMST(df.port_locations[,2:3], verbose = FALSE)
 
 ``` r
 ## Plot:
-map <- c(left = -8, bottom = 32, right = 20, top = 47)
+map_grid <- c(left = -8, bottom = 32, right = 20, top = 47)
     
-get_stamenmap(map, zoom = 5) %>% ggmap()+
+get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
   stat_MST(data = out,
            aes(x = lon, y = lat, from=from, to=to), 
            colour="red", linetype = 2)+
