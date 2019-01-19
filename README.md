@@ -1,35 +1,52 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-emstreeR
-========
+
+# emstreeR
 
 <!-- # emstreeR <img src="man/figures/logo.png" align="right" /> -->
-[![Travis-CI Build Status](https://travis-ci.org/allanvc/emstreeR.svg?branch=master)](https://travis-ci.org/allanvc/emstreeR) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/emstreeR)](https://cran.r-project.org/package=emstreeR) <!-- [![Downloads](http://cranlogs.r-pkg.org/badges/emstreeR?color=brightgreen)](http://www.r-pkg.org/pkg/emstreeR) --> [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/grand-total/emstreeR)](https://cran.r-project.org/package=emstreeR) [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
 
-Overview
---------
+<!-- [![Downloads](http://cranlogs.r-pkg.org/badges/emstreeR?color=brightgreen)](http://www.r-pkg.org/pkg/emstreeR) -->
 
-The **emstreeR** package allows users to fast and easily compute an Euclidean Minimum Spanning Tree from data. This package uses 'mlpack' - the C++ Machine Learning library which is called on background. **emstreeR** works as a wrapper, so that R users can benefit from the C++ function for computing an Euclidean Minimum Spanning Tree without touching the C++ code. The package also provides functions and an S3 method for readily plotting the Minimum Spanning Trees (MST) using either 'base' R, 'scatterplot3d' or 'ggplot2' style.
+<!-- one space after links to display badges side by side -->
 
--   `computeMST()` computes an Euclidean Minimum Spanning Tree (EMST) for the input data.
--   `plot.MST()` an S3 method of the generic function plot() for plotting a 2D MST.
--   `plotMST3D()` plots a 3D MST.
--   `stat_MST()` a 'ggplot2' Stat extension for plotting a 2D MST.
+[![Travis-CI Build
+Status](https://travis-ci.org/allanvc/emstreeR.svg?branch=master)](https://travis-ci.org/allanvc/emstreeR)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/emstreeR)](https://cran.r-project.org/package=emstreeR)
+[![Downloads from the RStudio CRAN
+mirror](https://cranlogs.r-pkg.org/badges/grand-total/emstreeR)](https://cran.r-project.org/package=emstreeR)
+[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
 
-Installation
-------------
+## Overview
+
+**emstreeR** is a package for fast and easily computing Euclidean
+Minimum Spanning Trees (EMST). It heavily relies on ‘RcppMLPACK’ and
+‘Rcpp’ to work as wrapper to the EMST Dual-Tree Boruvka algorithm
+(March, Ram, Gray, 2010) implemented in ‘mlpack’ - the C++ Machine
+Learning library (Curtin, 2005). With ‘emstreeR’, R users have access to
+the C++ fast EMST algorithm without having to deal with the R-‘Rcpp’-C++
+integration. The package also provides functions and an S3 method for
+readily plotting the Minimum Spanning Trees (MST) using either ‘base’,
+‘scatterplot3d’ or ‘ggplot2’ style.
+
+  - `computeMST()` computes an Euclidean Minimum Spanning Tree for the
+    input data.
+  - `plot.MST()` an S3 method of the generic function plot() for
+    plotting a 2D MST.
+  - `plotMST3D()` plots a 3D MST.
+  - `stat_MST()` a ‘ggplot2’ Stat extension for plotting a 2D MST.
+
+## Installation
 
 ``` r
 # CRAN version
-install.packages("emstreeR") # not working yet
+install.packages("emstreeR")
 
-# Or Github version
+# Dev version
 if (!require('devtools')) install.packages('devtools')
 devtools::install_github("allanvc/emstreeR")
 ```
 
-Basic Usage
------------
+## Basic Usage
 
 ``` r
 ## artificial data:
@@ -71,8 +88,7 @@ out
 #> 14 -0.913706515 -1.753315    1  1 0.0000000
 ```
 
-Plotting
---------
+## Plotting
 
 ### 2D Plots
 
@@ -95,7 +111,7 @@ out <- ComputeMST(d, verbose = FALSE)
 plot(out, col.pts = "red", col.segts = "blue")
 ```
 
-<img src="man/figures/README-base-1.png">
+<img src="man/figures/README-base-1.png" width="650" height="500">
 
 ``` r
 ## 2D plot with ggplot2:
@@ -105,7 +121,7 @@ ggplot(data = out, aes(x = x, y = y, from = from, to = to))+
   stat_MST(colour="red")
 ```
 
-<img src="man/figures/README-ggplot-1.png">
+<img src="man/figures/README-ggplot-1.png" width="600" height="400">
 
 ``` r
 ## 2D curved edges plot with ggplot2:
@@ -115,7 +131,7 @@ ggplot(data = out, aes(x = x, y = y, from=from, to=to))+
   stat_MST(geom="curve")
 ```
 
-<img src="man/figures/README-ggplot_curved-1.png">
+<img src="man/figures/README-ggplot_curved-1.png" width="600" height="400">
 
 ### 3D Plot
 
@@ -138,10 +154,9 @@ out <- ComputeMST(d, verbose = FALSE)
 plotMST3D(out, xlab = "xaxis", main="Just a MST 3D plot")
 ```
 
-<img src="man/figures/README-scatterplot3d-1.png">
+<img src="man/figures/README-scatterplot3d-1.png" width="600" height="400">
 
-Extras
-------
+## Extras
 
 ``` r
 ## plotting MST on maps:
@@ -181,9 +196,19 @@ get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
   geom_point(data = out, aes(x = lon, y = lat), size=3)
 ```
 
-<img src="man/figures/README-ggmaps-1.png">
+<img src="man/figures/README-ggmaps-1.png" width="600" height="400">
 
-License
--------
+## License
 
 This package is licensed under the terms of the BSD 3-clause License.
+
+## References
+
+Curtin, R. R. et al. (2005). Mlpack: A scalable C++ machine learning
+library. *Journal of Machine Learning Research*, v. 14, 2013.
+<doi:10.1145/1835804.1835882>.
+
+March, W. B., and Ram, P., and Gray, A. G. (2010). *Fast euclidian
+minimum spanning tree: algorithm analysis, and applications*. 16th ACM
+SIGKDD International Conference on Knowledge Discovery and Data mining,
+July 25-28 2010. Washington, DC, USA. <doi:10.21105/joss.00726>.

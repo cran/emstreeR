@@ -10,33 +10,32 @@
 }
 
 \section{Introduction}{
-  This package provides an R interface to the Dual-Tree Boruvka algorithm 
-  (March, Ram, Gray, 2010) from 'mlpack' - the C++ Machine Learning 
-  Library (Curtin et. al., 2005). The Dual-Tree Boruvka is 
+  This package relies on RcppMLPACK to provide an R interface to the Dual-Tree 
+  Boruvka algorithm (March, Ram, Gray, 2010) from 'mlpack' - the C++ Machine 
+  Learning Library (Curtin et. al., 2005). The Dual-Tree Boruvka is 
   theoretically and emiprically the fastest algorithm for computing an Euclidean
   Minimum Spanning Tree (EMST). 
 }
 
 \section{Computing the Minimum Spanning Tree}{
-  \code{\link[emstreeR]{ComputeMST}} is the main function of this package and 
-  its name speaks for itself. It is a fast wrapper to its 
-  \code{C++} homonym from 'mlpack' for computing an Euclidean Minimum 
-  Spanning Tree. Compared to functions in other MST related \R packages, 
-  \code{\link[emstreeR]{ComputeMST}} is easier to use because it receives the 
-  data as a \code{numeric matrix} or a \code{data.frame}, which are the most 
-  common data input formats in the wild. You won't need to put it into a graph 
-  format as you otherwise would in other packages.
+  \code{\link[emstreeR]{ComputeMST}} is the main function of this package. It is
+  a fast wrapper to its \code{C++} homonym from 'mlpack' for computing an 
+  Euclidean Minimum Spanning Tree. Compared to functions in other MST related \R 
+  packages, \code{\link[emstreeR]{ComputeMST}} is easier to use because you can 
+  pass your data as a \code{numeric matrix} or a \code{data.frame}, which are 
+  the most common data input formats in the wild. You do not have to put it into 
+  a graph format as you otherwise would in other packages.
 }
 
 \section{Plotting}{
 
-  This package also offers wrappers functions and methods for plotting the 
+  'emstreeR' also offers wrappers functions and an S3 method for plotting the 
   resulting MST from \code{\link[emstreeR]{ComputeMST}}.
 
 \itemize{
   \item{\code{\link[emstreeR]{plot.MST}} is an S3 method to the generic function 
-  \code{\link{plot}} that produces 2D scatter plots with segments between the points 
-  in a 'base' R style, following the linkage order in the MST.}
+  \code{\link{plot}} that produces 2D scatter plots with segments between the 
+  points in a 'base' R style, following the linkage order in the MST.}
   
   \item{\code{\link[emstreeR]{plotMST3D}} produces a 3D point cloud with segments 
   between the points following the linkage order in the MST and using the 
@@ -51,15 +50,13 @@
 
 \author{
 
-  \strong{Mantainer}: Allan Quadros \email{allanvcq@gmail.com}
+  Author & Mantainer: Allan Quadros \email{allanvcq@gmail.com}
   
-  Authors:
+  Contributors:
   \itemize{
-    \item{Allan Quadros}
     \item{Andre Cancado \email{cancado@unb.br}}
-    \item{Pedro Brom \email{pcbrom@gmail.com}}
-    \item{Eduardo Hellas \email{ehellas@gmail.com}}
   }
+  
 
 }
 
@@ -77,14 +74,10 @@ International Conference on Knowledge Discovery and Data mining, July
 
 \seealso{
 
-  \itemize{
-  
   Useful links:
   
-    \item{\code{mlpack}: \url{http://www.mlpack.org/}}
-    
-    \item{\code{ggplot2}: \url{https://ggplot2.tidyverse.org}}
-  
+  \itemize{
+    \item{ \code{mlpack}: \url{http://www.mlpack.org/}}
   }
 
 }

@@ -1,12 +1,47 @@
-# emstreeR 2.0.1 (2018-12-06 - first patch after CRAN)
+# emstreeR 2.1.1 (2018-01-19 - second CRAN patch)
 
 ## Internal
 
-* Fix compilation in OS X and Solaris:
-  - copied 'Makervars' and 'Makevars.win' from Rcpp
-  - added //Rcpp[[depends(RcppMLPACK)]] to mlpack_mst.cpp file
+* Fixed Imports in DESCRIPTION file, removing the mention to RcppMLPACK in order
+to eliminate NOTES when building on Fedora and Solaris
 
+## New data, functions, and features
+
+* updated DESCRIPTION file.
+* updated 'emstreeR-package' file.
+* updated 'README.md' file.
+
+---
+
+# emstreeR 2.1.0 (2018-12-06 - first CRAN patch)
+
+## Internal
+
+* Fixed compilation in OS X and Solaris:
+  - copied 'Makervars' and 'Makevars.win' from RcppMLPACK with minor modifications
+  - added //Rcpp[[depends(RcppMLPACK)]] to mlpack_mst.cpp file
 
 ## New data, functions, and features
 
 * fixed typos in the DESCRIPTION file.
+
+---
+
+# emstreeR 2.0.0 (2018-11-28 - pre CRAN release)
+
+## Internal
+
+* Fix [-Wlang-lang] windows compilation WARNINGs when running devtools::win_check() 
+  by adding `CXX_STD = CXX_11` line to the Makevars.win file. Reference: "Writing
+  R Extensions" manual, section 1.2.4 - "Using C++11 code".
+
+## New data, functions, and features
+
+* Substituted the wrapper function `plotMST()` for the S3 method `plot.MST()`
+
+* Added 'dontrun' example 'honeymoon cruise' to the package README file 
+
+* Removed broken Japan 'dontrun' example from the package help page 
+  'emstreeR-package.Rd'because of the token problem with GoogleMaps API.
+
+* fixed errors in the DESCRIPTION file as suggested by CRAN
