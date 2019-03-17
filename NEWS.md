@@ -1,4 +1,14 @@
-# emstreeR 2.1.1 (2018-01-19 - second CRAN patch)
+# emstreeR 2.1.2 (2019-03-13 - third CRAN patch)
+
+## New data, functions, and features
+
+* updated DESCRIPTION file.
+* fixed citations in DESCRIPTION, README and emstreeR-package.Rd
+* updated documentation in the ComputeMST.R file 
+
+---
+
+# emstreeR 2.1.1 (2019-01-19 - second CRAN patch)
 
 ## Internal
 

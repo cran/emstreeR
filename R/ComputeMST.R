@@ -1,17 +1,17 @@
 #' @title Euclidean Minimum Spanning Tree
 #'
-#' @description Computes an Euclidean Minimum Spanning Tree (EMST) for the 
-#'     input data. \code{ComputeMST} is a wrapper for the homonym function in
+#' @description Computes an Euclidean Minimum Spanning Tree (EMST) from the 
+#'     data. \code{ComputeMST} is a wrapper for the homonym function in
 #'     the 'mlpack' library.
 #'
 #' @param x a \code{numeric matrix} or \code{data.frame}.
 #' @param verbose If \code{TRUE}, mutes the output from the C++
-#'     algorithm.
+#'     code.
 #'
 #' @details Before the computation, ComputeMST runs some checks and 
 #'     transformations (if needed) on the provided data using the 
 #'     \link{data_check} function. After the computation, it returns the 
-#'     'cleaned' inputed data plus 3 columns: \code{from}, \code{to}, and 
+#'     'cleaned' data plus 3 columns: \code{from}, \code{to}, and 
 #'     \code{distance}. Those columns show each pair of start and end points, 
 #'     and the distance between them, forming the Minimum Spanning Tree (MST).
 #'
@@ -33,8 +33,8 @@
 #' ## artifical data
 #' set.seed(1984)
 #' n <- 15
-#' c1 <- data.frame(x = rnorm(n,-0.2, sd=0.2), y = rnorm(n,-2,sd=0.2))
-#' c2 <- data.frame(x = rnorm(n,-1.1, sd=0.15), y = rnorm(n,-2,sd=0.3)) 
+#' c1 <- data.frame(x = rnorm(n, -0.2, sd = 0.2), y = rnorm(n, -2, sd = 0.2))
+#' c2 <- data.frame(x = rnorm(n, -1.1, sd = 0.15), y = rnorm(n, -2, sd = 0.3)) 
 #' d <- rbind(c1, c2)
 #' d <- as.data.frame(d)
 #' 

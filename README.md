@@ -20,19 +20,18 @@ mirror](https://cranlogs.r-pkg.org/badges/grand-total/emstreeR)](https://cran.r-
 
 **emstreeR** is a package for fast and easily computing Euclidean
 Minimum Spanning Trees (EMST). It heavily relies on ‘RcppMLPACK’ and
-‘Rcpp’ to work as wrapper to the EMST Dual-Tree Boruvka algorithm
-(March, Ram, Gray, 2010) implemented in ‘mlpack’ - the C++ Machine
-Learning library (Curtin, 2005). With ‘emstreeR’, R users have access to
-the C++ fast EMST algorithm without having to deal with the R-‘Rcpp’-C++
-integration. The package also provides functions and an S3 method for
-readily plotting the Minimum Spanning Trees (MST) using either ‘base’,
-‘scatterplot3d’ or ‘ggplot2’ style.
+‘Rcpp’, working as a wrapper to the fast EMST Dual-Tree Boruvka
+algorithm (March, Ram, Gray, 2010) implemented in ‘mlpack’ - the C++
+Machine Learning library (Curtin, 2013). Thus, do not have to deal with
+the R-‘Rcpp’-C++ integration. The package also provides functions and an
+S3 method for readily plotting Minimum Spanning Trees (MST) using either
+‘base’ R, ‘scatterplot3d’ or ‘ggplot2’ style.
 
   - `computeMST()` computes an Euclidean Minimum Spanning Tree for the
     input data.
   - `plot.MST()` an S3 method of the generic function plot() for
     plotting a 2D MST.
-  - `plotMST3D()` plots a 3D MST.
+  - `plotMST3D()` plots a 3D MST using the ‘scatterplot3d’ style.
   - `stat_MST()` a ‘ggplot2’ Stat extension for plotting a 2D MST.
 
 ## Installation
@@ -52,8 +51,8 @@ devtools::install_github("allanvc/emstreeR")
 ## artificial data:
 set.seed(1984)
 n <- 7
-c1 <- data.frame(x = rnorm(n,-0.2, sd=0.2), y = rnorm(n,-2,sd=0.2))
-c2 <- data.frame(x = rnorm(n,-1.1, sd=0.15), y = rnorm(n,-2,sd=0.3)) 
+c1 <- data.frame(x = rnorm(n, -0.2, sd = 0.2), y = rnorm(n, -2, sd = 0.2))
+c2 <- data.frame(x = rnorm(n, -1.1, sd = 0.15), y = rnorm(n, -2, sd = 0.3)) 
 d <- rbind(c1, c2)
 d <- as.data.frame(d)
 
@@ -96,8 +95,8 @@ out
 ## artifical data for 2D plots:
 set.seed(1984)
 n <- 15
-c1 <- data.frame(x = rnorm(n,-0.2, sd=0.2), y = rnorm(n,-2,sd=0.2))
-c2 <- data.frame(x = rnorm(n,-1.1, sd=0.15), y = rnorm(n,-2,sd=0.3)) 
+c1 <- data.frame(x = rnorm(n, -0.2, sd = 0.2), y = rnorm(n, -2, sd = 0.2))
+c2 <- data.frame(x = rnorm(n, -1.1, sd = 0.15), y = rnorm(n, -2, sd = 0.3)) 
 d <- rbind(c1, c2)
 d <- as.data.frame(d)
   
@@ -111,7 +110,7 @@ out <- ComputeMST(d, verbose = FALSE)
 plot(out, col.pts = "red", col.segts = "blue")
 ```
 
-<img src="man/figures/README-base-1.png" width="650" height="500">
+<img src="man/figures/README-plot-1.png" width="650" height="500">
 
 ``` r
 ## 2D plot with ggplot2:
@@ -121,17 +120,17 @@ ggplot(data = out, aes(x = x, y = y, from = from, to = to))+
   stat_MST(colour="red")
 ```
 
-<img src="man/figures/README-ggplot-1.png" width="600" height="400">
+<img src="man/figures/README-statMST-1.png" width="600" height="400">
 
 ``` r
 ## 2D curved edges plot with ggplot2:
 library(ggplot2)
-ggplot(data = out, aes(x = x, y = y, from=from, to=to))+ 
+ggplot(data = out, aes(x = x, y = y, from = from, to = to))+ 
   geom_point()+ 
   stat_MST(geom="curve")
 ```
 
-<img src="man/figures/README-ggplot_curved-1.png" width="600" height="400">
+<img src="man/figures/README-statMST_curved-1.png" width="600" height="400">
 
 ### 3D Plot
 
@@ -139,9 +138,9 @@ ggplot(data = out, aes(x = x, y = y, from=from, to=to))+
 ## artificial data for 3D plots:
 n = 99
 set.seed(1984)
-d1<-matrix(rnorm(n,mean=-2,sd=.5), n/3, 3) # 3d
-d2<-matrix(rnorm(n,mean=0,sd=.3), n/3, 3)
-d3<-matrix(rnorm(n,mean=3,sd=.4), n/3, 3)
+d1<-matrix(rnorm(n, mean = -2, sd = .5), n/3, 3) # 3d
+d2<-matrix(rnorm(n, mean = 0, sd = .3), n/3, 3)
+d3<-matrix(rnorm(n, mean = 3, sd = .4), n/3, 3)
 d<-rbind(d1,d2,d3) # just to show a matrix input
   
 ## MST:
@@ -151,10 +150,10 @@ out <- ComputeMST(d, verbose = FALSE)
 
 ``` r
 ## simple 3D plot:
-plotMST3D(out, xlab = "xaxis", main="Just a MST 3D plot")
+plotMST3D(out, xlab = "xaxis", col.pts = "orange", col.segts = "red", main = "Just a MST 3D plot")
 ```
 
-<img src="man/figures/README-scatterplot3d-1.png" width="600" height="400">
+<img src="man/figures/README-plotMST3D-1.png" width="600" height="400">
 
 ## Extras
 
@@ -196,7 +195,7 @@ get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
   geom_point(data = out, aes(x = lon, y = lat), size=3)
 ```
 
-<img src="man/figures/README-ggmaps-1.png" width="600" height="400">
+<img src="man/figures/README-statMST_ggmaps-1.png" width="600" height="400">
 
 ## License
 
@@ -204,11 +203,10 @@ This package is licensed under the terms of the BSD 3-clause License.
 
 ## References
 
-Curtin, R. R. et al. (2005). Mlpack: A scalable C++ machine learning
-library. *Journal of Machine Learning Research*, v. 14, 2013.
-<doi:10.1145/1835804.1835882>.
-
 March, W. B., and Ram, P., and Gray, A. G. (2010). *Fast euclidian
 minimum spanning tree: algorithm analysis, and applications*. 16th ACM
 SIGKDD International Conference on Knowledge Discovery and Data mining,
-July 25-28 2010. Washington, DC, USA. <doi:10.21105/joss.00726>.
+July 25-28 2010. Washington, DC, USA. <doi:10.1145/1835804.1835882>.
+
+Curtin, R. R. et al. (2013). Mlpack: A scalable C++ machine learning
+library. *Journal of Machine Learning Research*, v. 14, 2013.

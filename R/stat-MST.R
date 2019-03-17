@@ -46,8 +46,8 @@
 #' ## 2D artificial data:
 #' set.seed(1984)
 #' n <- 15
-#' c1 <- data.frame(x = rnorm(n,-0.2, sd=0.2), y = rnorm(n,-2,sd=0.2))
-#' c2 <- data.frame(x = rnorm(n,-1.1, sd=0.15), y = rnorm(n,-2,sd=0.3)) 
+#' c1 <- data.frame(x = rnorm(n, -0.2, sd = 0.2), y = rnorm(n, -2, sd = 0.2))
+#' c2 <- data.frame(x = rnorm(n, -1.1, sd = 0.15), y = rnorm(n, -2, sd = 0.3)) 
 #' d <- rbind(c1, c2)
 #' d <- as.data.frame(d)
 #' 
@@ -58,17 +58,17 @@
 #' library(ggplot2)
 #' ggplot(data = out, 
 #'     aes(x = x, y = y, 
-#'     from=from, to=to))+ 
+#'     from = from, to = to))+ 
 #'     geom_point()+
-#'     stat_MST(colour="red", linetype = 2)
+#'     stat_MST(colour = "red", linetype = 2)
 #'     
 #' #2) curved edges
 #' library(ggplot2)
 #' ggplot(data = out, 
 #'     aes(x = x, y = y, 
-#'     from=from, to=to))+ 
+#'     from = from, to = to))+ 
 #'     geom_point()+
-#'     stat_MST(geom="curve", colour="red", linetype = 2)
+#'     stat_MST(geom = "curve", colour = "red", linetype = 2)
 #'
 #' \dontrun{
 #' ## plotting MST on maps:
@@ -99,9 +99,9 @@
 #' 
 #' get_stamenmap(map, zoom = 5) %>% ggmap()+
 #'   stat_MST(data = out, 
-#'            aes(x = lon, y = lat, from=from, to=to), 
-#'            colour="red", linetype = 2)+
-#'   geom_point(data = out, aes(x = lon, y = lat), size=3)
+#'            aes(x = lon, y = lat, from = from, to = to), 
+#'            colour = "red", linetype = 2)+
+#'   geom_point(data = out, aes(x = lon, y = lat), size = 3)
 #' 
 #' 
 #' #4) World Map travels:
@@ -127,7 +127,7 @@
 #'    
 #'    
 #'  d <- read.delim(text = country_coords_txt, header = FALSE, 
-#'  quote = "'", sep = "", col.names = c('id', 'lon', 'lat', 'name'))
+#'    quote = "'", sep = "", col.names = c('id', 'lon', 'lat', 'name'))
 #'    
 #'  out <- ComputeMST(d[,2:3])
 #'  
@@ -136,7 +136,8 @@
 #'    size = 0.15)
 #'    
 #'  ggplot()+ country_shapes+
-#'    stat_MST(geomdata = out, aes(x = lon, y = lat, from=from, to=to), colour="red", linetype = 2)+
+#'    stat_MST(geomdata = out, aes(x = lon, y = lat, from = from, to = to), 
+#'      colour = "red", linetype = 2)+
 #'    geom_point(data = out, aes(x = lon, y = lat), size=2)
 #'}
 #'
