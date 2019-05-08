@@ -4,20 +4,24 @@
 \alias{ComputeMST}
 \title{Euclidean Minimum Spanning Tree}
 \usage{
-ComputeMST(x, verbose = TRUE)
+ComputeMST(x, verbose = TRUE, scale = FALSE)
 }
 \arguments{
 \item{x}{a \code{numeric matrix} or \code{data.frame}.}
 
 \item{verbose}{If \code{TRUE}, mutes the output from the C++
 code.}
+
+\item{scale}{If \code{TRUE}, it will scale your data with 
+\code{\link[base]{scale}} before computing the the minimum spanning tree 
+and the distances to be presented will refer to the scaled data.}
 }
 \value{
 an object of class \code{MST} and \code{data.frame}.
 }
 \description{
 Computes an Euclidean Minimum Spanning Tree (EMST) from the 
-    data. \code{ComputeMST} is a wrapper for the homonym function in
+    data. \code{ComputeMST} is a wrapper around the homonym function in
     the 'mlpack' library.
 }
 \details{

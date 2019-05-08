@@ -1,3 +1,17 @@
+# emstreeR 2.2.0 (2019-05-07 - 4th CRAN patch)
+
+## New data, functions, and features
+
+* added 'scale' parameter in the ComputeMST() function. It gives the option to 
+scale or not your data before computing the MST (Thank's to Moses Obiri who 
+pointed this out).
+* updated documentation in ComputeMST.R file
+* updated documentation in emstreeR-package.Rd file
+* deleted honeymoon example from README file, since dsk service for maps are not
+available anymore.
+
+---
+
 # emstreeR 2.1.2 (2019-03-13 - third CRAN patch)
 
 ## New data, functions, and features

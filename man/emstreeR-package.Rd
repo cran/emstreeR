@@ -11,7 +11,7 @@
 
 \section{Introduction}{
   This package relies on RcppMLPACK to provide an R interface to the Dual-Tree 
-  Boruvka algorithm (March, Ram, Gray, 2010) provided in 'mlpack' - the C++ 
+  Boruvka algorithm (March, Ram, Gray, 2010) implemented in 'mlpack' - the C++ 
   Machine Learning Library (Curtin et. al., 2013). The Dual-Tree Boruvka is 
   theoretically and emiprically the fastest algorithm for computing an Euclidean
   Minimum Spanning Tree (EMST). 

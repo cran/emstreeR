@@ -59,32 +59,32 @@ d <- as.data.frame(d)
 ## MST:
 library(emstreeR)
 out <- ComputeMST(d)
-#> 8 edges found so far.
+#> 9 edges found so far.
 #> 182 cumulative base cases.
 #> 0 cumulative node combinations scored.
 #> 12 edges found so far.
-#> 344 cumulative base cases.
+#> 332 cumulative base cases.
 #> 0 cumulative node combinations scored.
 #> 13 edges found so far.
-#> 442 cumulative base cases.
+#> 430 cumulative base cases.
 #> 0 cumulative node combinations scored.
-#> Total spanning tree length: 8.81192
+#> Total spanning tree length: 2.49929
 out
-#>               x         y from to  distance
-#> 1  -0.118159357 -2.166545   11 13 0.2039000
-#> 2  -0.264604994 -2.105242    6  7 0.3429154
-#> 3  -0.072829535 -1.716803   10 14 0.3540068
-#> 4  -0.569225757 -1.943598    8 12 0.3541008
-#> 5  -0.009270527 -1.942413    1  2 0.4825166
-#> 6   0.037697969 -1.832590    3  7 0.5072094
-#> 7  -0.091509110 -1.795213   12 13 0.6017045
-#> 8  -1.097338236 -1.871078    5  6 0.7142135
-#> 9  -0.841400898 -2.194585    8 14 0.8351710
-#> 10 -1.081888729 -1.728982    4 12 0.9724635
-#> 11 -1.366334073 -2.003965    4  5 1.0563892
-#> 12 -1.081078171 -1.925745    2  5 1.1558933
-#> 13 -1.357063682 -1.972485    2  9 1.2314331
-#> 14 -0.913706515 -1.753315    1  1 0.0000000
+#>               x         y from to   distance
+#> 1  -0.118159357 -2.166545   11 13 0.03281747
+#> 2  -0.264604994 -2.105242    8 12 0.05703382
+#> 3  -0.072829535 -1.716803    3  7 0.08060398
+#> 4  -0.569225757 -1.943598    5  6 0.11944501
+#> 5  -0.009270527 -1.942413    6  7 0.13450475
+#> 6   0.037697969 -1.832590    8 10 0.14293342
+#> 7  -0.091509110 -1.795213    1  2 0.15875908
+#> 8  -1.097338236 -1.871078   10 14 0.16993335
+#> 9  -0.841400898 -2.194585    1  5 0.24918237
+#> 10 -1.081888729 -1.728982    8 13 0.27882008
+#> 11 -1.366334073 -2.003965    2  4 0.34485145
+#> 12 -1.081078171 -1.925745    9 12 0.36016689
+#> 13 -1.357063682 -1.972485    4  9 0.37023475
+#> 14 -0.913706515 -1.753315    1  1 0.00000000
 ```
 
 ## Plotting
@@ -138,10 +138,10 @@ ggplot(data = out, aes(x = x, y = y, from = from, to = to))+
 ## artificial data for 3D plots:
 n = 99
 set.seed(1984)
-d1<-matrix(rnorm(n, mean = -2, sd = .5), n/3, 3) # 3d
-d2<-matrix(rnorm(n, mean = 0, sd = .3), n/3, 3)
-d3<-matrix(rnorm(n, mean = 3, sd = .4), n/3, 3)
-d<-rbind(d1,d2,d3) # just to show a matrix input
+d1 <- matrix(rnorm(n, mean = -2, sd = .5), n/3, 3) # 3d
+d2 <- matrix(rnorm(n, mean = 0, sd = .3), n/3, 3)
+d3 <- matrix(rnorm(n, mean = 3, sd = .4), n/3, 3)
+d <- rbind(d1,d2,d3) # showing a matrix input
   
 ## MST:
 library(emstreeR)
@@ -150,52 +150,10 @@ out <- ComputeMST(d, verbose = FALSE)
 
 ``` r
 ## simple 3D plot:
-plotMST3D(out, xlab = "xaxis", col.pts = "orange", col.segts = "red", main = "Just a MST 3D plot")
+plotMST3D(out, xlab = "xaxis", col.pts = "orange", col.segts = "red", main = "a simple MST 3D plot")
 ```
 
 <img src="man/figures/README-plotMST3D-1.png" width="600" height="400">
-
-## Extras
-
-``` r
-## plotting MST on maps:
-# honeymoon cruise example
-
-library(ggmap)
-library(dplyr)  
-    
-## define ports:
-df.port_locations <- data.frame(location = c("Civitavecchia, Italy", 
-                                             "Genova, Italy",
-                                             "Marseille, France",
-                                             "Barcelona, Spain",
-                                             "Tunis, Tunisia",
-                                             "Palermo, Italy"), 
-                                stringsAsFactors = FALSE)
-    
-## get latitude and longitude:
-geo.port_locations <- geocode(df.port_locations$location, source = "dsk")
-    
-## combine data:
-df.port_locations <- cbind(df.port_locations, geo.port_locations)
-    
-## MST:
-library(emstreeR)
-out <- ComputeMST(df.port_locations[,2:3], verbose = FALSE)
-```
-
-``` r
-## Plot:
-map_grid <- c(left = -8, bottom = 32, right = 20, top = 47)
-    
-get_stamenmap(map_grid, zoom = 5) %>% ggmap()+
-  stat_MST(data = out,
-           aes(x = lon, y = lat, from=from, to=to), 
-           colour="red", linetype = 2)+
-  geom_point(data = out, aes(x = lon, y = lat), size=3)
-```
-
-<img src="man/figures/README-statMST_ggmaps-1.png" width="600" height="400">
 
 ## License
 
@@ -206,7 +164,7 @@ This package is licensed under the terms of the BSD 3-clause License.
 March, W. B., and Ram, P., and Gray, A. G. (2010). *Fast euclidian
 minimum spanning tree: algorithm analysis, and applications*. 16th ACM
 SIGKDD International Conference on Knowledge Discovery and Data mining,
-July 25-28 2010. Washington, DC, USA. <doi:10.1145/1835804.1835882>.
+July 25-28 2010. Washington, DC, USA. 
 
 Curtin, R. R. et al. (2013). Mlpack: A scalable C++ machine learning
 library. *Journal of Machine Learning Research*, v. 14, 2013.

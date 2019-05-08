@@ -1,12 +1,15 @@
 #' @title Euclidean Minimum Spanning Tree
 #'
 #' @description Computes an Euclidean Minimum Spanning Tree (EMST) from the 
-#'     data. \code{ComputeMST} is a wrapper for the homonym function in
+#'     data. \code{ComputeMST} is a wrapper around the homonym function in
 #'     the 'mlpack' library.
 #'
 #' @param x a \code{numeric matrix} or \code{data.frame}.
 #' @param verbose If \code{TRUE}, mutes the output from the C++
 #'     code.
+#' @param scale If \code{TRUE}, it will scale your data with 
+#'     \code{\link[base]{scale}} before computing the the minimum spanning tree 
+#'     and the distances to be presented will refer to the scaled data.
 #'
 #' @details Before the computation, ComputeMST runs some checks and 
 #'     transformations (if needed) on the provided data using the 
@@ -44,30 +47,61 @@
 #' 
 #' @export
 #' 
-ComputeMST <- function(x, verbose=TRUE) {
+ComputeMST <- function(x, verbose=TRUE, scale=FALSE) {
   # returns a mst/df object
-  
   data_aux <- data_check(x)
-  if(!isTRUE(verbose)) {
-    BBmisc::suppressAll(
-      from_to_matrix <- mlpack_mst(scale(data_aux)) # always scaled  
-    )} else {
-      from_to_matrix <- mlpack_mst(scale(data_aux)) # always scaled  
-  } # as suggested at: https://github.com/rcppmlpack/RcppMLPACK1/issues/7
   
-  
-  from <- c(as.integer(from_to_matrix[1,]), 
-            1 ) # repeating the last link 
-  #.. for plots with ggplot2
-  to <- c(as.integer(from_to_matrix[2,]), 
-          1 ) # it should not be 
-  #.. "from" 1 "to" 1 in order to get stat_MST working
-  distance <- c(from_to_matrix[3,], 0) # adding a zero to the last row's 
-  #.. distance to not intefere in the total cost of the MST
-  
-  colnames(data_aux) <- colnames(x)
-  # we can't recover the rownames because sometimes data_check() may remove 
-  #.. lines with NA in the data
+  if(isFALSE(scale)){
+    if(isFALSE(verbose)) {
+      BBmisc::suppressAll(
+        from_to_matrix <- mlpack_mst(data_aux) # always scaled  
+      )} else {
+        from_to_matrix <- mlpack_mst(data_aux) # always scaled  
+      } # as suggested at: https://github.com/rcppmlpack/RcppMLPACK1/issues/7
+    
+    from <- c(as.integer(from_to_matrix[1,]), 
+              1 ) # repeating the last link 
+    #.. for plots with ggplot2
+    to <- c(as.integer(from_to_matrix[2,]), 
+            1 ) # it should not be 
+    #.. "from" 1 "to" 1 in order to get stat_MST working
+    distance <- c(from_to_matrix[3,], 0) # adding a zero to the last row's 
+    #.. distance to not intefere in the total cost of the MST
+    
+    colnames(data_aux) <- colnames(as.data.frame(x))
+    # forcing as a data.frame because sometimes it's a matrix with no colnames
+    # we can't recover the rownames because sometimes data_check() may remove 
+    #.. lines with NA in the data
+    
+    
+    
+  } else {
+    
+    data_aux <- scale(data_aux)
+    
+    if(isFALSE(verbose)) {
+      BBmisc::suppressAll(
+        from_to_matrix <- mlpack_mst(data_aux) # always scaled  
+      )} else {
+        from_to_matrix <- mlpack_mst(data_aux) # always scaled  
+      } # as suggested at: https://github.com/rcppmlpack/RcppMLPACK1/issues/7  
+    
+    from <- c(as.integer(from_to_matrix[1,]), 
+              1 ) # repeating the last link 
+    #.. for plots with ggplot2
+    to <- c(as.integer(from_to_matrix[2,]), 
+            1 ) # it should not be 
+    #.. "from" 1 "to" 1 in order to get stat_MST working
+    distance <- c(from_to_matrix[3,], 0) # adding a zero to the last row's 
+    #.. distance to not intefere in the total cost of the MST
+    
+    colnames(data_aux) <- paste0("scaled_", colnames(as.data.frame(x)))
+    # forcing as a data.frame because sometimes it's a matrix with no colnames
+    # we can't recover the rownames because sometimes data_check() may remove 
+    #.. lines with NA in the data
+    
+    
+  }
   
   x <- data.frame(data_aux, from, to, distance) # from and to are not linked 
   #..to the rows
@@ -76,6 +110,8 @@ ComputeMST <- function(x, verbose=TRUE) {
   rm(data_aux) # cleaning
   class(x) <- c("MST", "data.frame") # because we wanted a new plot.method for 
   #..objects of class "MST".
+  
+  
   
   return(x)
 }

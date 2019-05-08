@@ -2,8 +2,8 @@ Package: emstreeR
 Type: Package
 Title: Tools for Fast Computing and Plotting Euclidean Minimum Spanning
         Trees
-Version: 2.1.2
-Date: 2019-03-13
+Version: 2.2.0
+Date: 2019-05-07
 Authors@R: c(
     person(given="Allan", family="Quadros", email = "allanvcq@gmail.com",
     role = c("aut", "cre")),
@@ -26,11 +26,11 @@ Depends: R (>= 3.5.0)
 LinkingTo: Rcpp, RcppMLPACK, RcppArmadillo, BH
 BugReports: https://github.com/allanvc/emstreeR/issues
 SystemRequirements: C++11 compiler.
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2019-03-17 17:50:56 UTC; allan
+Packaged: 2019-05-08 02:52:53 UTC; allan
 Author: Allan Quadros [aut, cre],
   Andre Cancado [ctb]
 Maintainer: Allan Quadros <allanvcq@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-03-17 18:40:03 UTC
+Date/Publication: 2019-05-08 04:50:03 UTC
