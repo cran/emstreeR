@@ -4,9 +4,7 @@
 # emstreeR
 
 <!-- # emstreeR <img src="man/figures/logo.png" align="right" /> -->
-
 <!-- [![Downloads](http://cranlogs.r-pkg.org/badges/emstreeR?color=brightgreen)](http://www.r-pkg.org/pkg/emstreeR) -->
-
 <!-- one space after links to display badges side by side -->
 
 [![Travis-CI Build
@@ -19,21 +17,21 @@ mirror](https://cranlogs.r-pkg.org/badges/grand-total/emstreeR)](https://cran.r-
 ## Overview
 
 `emstreeR` enables **R** users to fast and easily compute an Euclidean
-Minimum Spanning Tree (EMST) from data. This package relies on
-{RcppMLPACK} to provide an R interface for the Dual-Tree Boruvka
-algorithm (March, Ram, Gray, 2010) implemented in mlpack, the C++
-Machine Learning Library (Curtin et. al., 2013). The Dual-Tree Boruvka
-is theoretically and empirically the fastest algorithm for computing an
-EMST. This package also provides functions and an S3 method for readily
-plotting Minimum Spanning Trees (MST) using either the style of the
-{base}, {scatterplot3d}, or {ggplot2} libraries.
+Minimum Spanning Tree (EMST) from data. This package relies on the R API
+for {mlpack} - the C++ Machine Learning Library (Curtin et. al., 2013).
+{emstreeR} uses the Dual-Tree Boruvka (March, Ram, Gray, 2010,
+<https://doi.org/10.1145/1835804.1835882>), which is theoretically and
+empirically the fastest algorithm for computing an EMST. This package
+also provides functions and an S3 method for readily plotting Minimum
+Spanning Trees (MST) using either the style of the {base},
+{scatterplot3d}, or {ggplot2} libraries.
 
-  - `computeMST()` computes an Euclidean Minimum Spanning Tree for the
+-   `computeMST()` computes an Euclidean Minimum Spanning Tree for the
     input data.
-  - `plot.MST()` an S3 method for the generic function `plot()` that
+-   `plot.MST()` an S3 method for the generic function `plot()` that
     produces 2D MST plots.
-  - `plotMST3D()` plots a 3D MST using the {scatterplot3d} style.
-  - `stat_MST()` a {ggplot2} Stat extension for plotting a 2D MST.
+-   `plotMST3D()` plots a 3D MST using the {scatterplot3d} style.
+-   `stat_MST()` a {ggplot2} Stat extension for plotting a 2D MST.
 
 ## Installation
 
@@ -62,16 +60,18 @@ library(emstreeR)
 out <- ComputeMST(d)
 ```
 
-    ## 9 edges found so far.
-    ## 182 cumulative base cases.
-    ## 0 cumulative node combinations scored.
-    ## 12 edges found so far.
-    ## 332 cumulative base cases.
-    ## 0 cumulative node combinations scored.
-    ## 13 edges found so far.
-    ## 430 cumulative base cases.
-    ## 0 cumulative node combinations scored.
-    ## Total spanning tree length: 2.49929
+    ## [0;32m[INFO ] [0mBuilding tree.
+    ## [0;32m[INFO ] [0mCalculating minimum spanning tree.
+    ## [0;32m[INFO ] [0m9 edges found so far.
+    ## [0;32m[INFO ] [0m18 cumulative base cases.
+    ## [0;32m[INFO ] [0m89 cumulative node combinations scored.
+    ## [0;32m[INFO ] [0m12 edges found so far.
+    ## [0;32m[INFO ] [0m31 cumulative base cases.
+    ## [0;32m[INFO ] [0m182 cumulative node combinations scored.
+    ## [0;32m[INFO ] [0m13 edges found so far.
+    ## [0;32m[INFO ] [0m36 cumulative base cases.
+    ## [0;32m[INFO ] [0m237 cumulative node combinations scored.
+    ## [0;32m[INFO ] [0mTotal spanning tree length: 2.49929
 
 ``` r
 out
@@ -170,8 +170,7 @@ This package is licensed under the terms of the BSD 3-clause License.
 March, W. B., and Ram, P., and Gray, A. G. (2010). *Fast euclidian
 minimum spanning tree: algorithm analysis, and applications*. 16th ACM
 SIGKDD International Conference on Knowledge Discovery and Data mining,
-July 25-28 2010. Washington, DC, USA,
-[doi:10.1145/1835804.1835882](https://doi.org/10.1145/1835804.1835882).
+July 25-28 2010. Washington, DC, USA.
 
 Curtin, R. R. et al. (2013). Mlpack: A scalable C++ machine learning
 library. *Journal of Machine Learning Research*, v. 14, 2013.
